@@ -1,0 +1,19 @@
+# Credenciais e configuração local — nunca versionar
+.env
+*.pfx
+*.p12
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Saídas geradas pelas automações
+saida/
+*.log
