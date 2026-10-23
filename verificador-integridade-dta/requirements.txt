@@ -1,0 +1,6 @@
+pandas
+oracledb
+selenium
+webdriver-manager
+python-dotenv
+pywin32; sys_platform == "win32"
