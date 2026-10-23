@@ -1,51 +1,49 @@
 """
-Verifica a integridade de cargas em trânsito aduaneiro (DTA) agendadas para o
-armazém e avisa a equipe por e-mail.
+Monitora as cargas em trânsito aduaneiro (DTA) agendadas para o armazém.
 
 Fluxo:
-1. Busca no banco Oracle os agendamentos do dia com DTA (placa + número).
-2. Ignora as DTAs que já foram comunicadas (histórico em CSV).
-3. Consulta cada DTA no site público da Receita Federal.
-4. Se houver registro de INTEGRIDADE, monta uma tabela HTML e envia pelo Outlook.
-5. Registra as DTAs comunicadas no histórico.
+1. Busca no Oracle os agendamentos de DTA (placa, documento, pré-gate e gate-in).
+2. Gate-in: para cada veículo que já entrou no pátio, registra a chegada no
+   Siscomex Trânsito, confere o registro no fluxo da declaração e envia um
+   e-mail com o status de cada veículo.
+3. Integridade: consulta cada DTA no site da Receita e avisa a equipe quando
+   houver ocorrência de integridade (violação de lacre ou de volumes).
+4. Guarda históricos em CSV para não processar o mesmo documento duas vezes.
 """
 import os
-import time
+from datetime import datetime
 from pathlib import Path
 
 import oracledb
 import pandas as pd
 from dotenv import load_dotenv
-from selenium import webdriver
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 
-URL_CONSULTA_DTA = "https://www4c.receita.fazenda.gov.br/g36154/jsp/consFluxoDecl.jsp"
-XPATH_CAMPO_DTA = '//*[@id="casca"]/table/tbody/tr[2]/td[3]/form/input[4]'
-XPATH_BOTAO_CONSULTAR = '//*[@id="casca"]/table/tbody/tr[2]/td[3]/form/input[5]'
-XPATH_RESULTADO = "/html/body/fieldset[13]/table/tbody/tr[1]/td"
-XPATH_DATA = "/html/body/fieldset[13]/table/tbody/tr[2]/td"
-XPATH_RESPONSAVEL = "/html/body/fieldset[13]/table/tbody/tr[3]/td"
-XPATH_RECINTO_ORIGEM = "/html/body/fieldset[2]/table/tbody/tr[2]/td"
+from robo_transito import RoboTransito
 
-COLUNAS_RESULTADO = ["DTA", "PLACA", "RESULTADO", "DATA", "NOME", "RECINTO ORIGEM"]
+NOME_ROTINA = "Monitor de DTA"
+COLUNAS_INTEGRIDADE = ["DTA", "PLACA", "RESULTADO", "DATA", "NOME", "RECINTO ORIGEM"]
+
+STATUS_CHEGADA = {
+    "OK": '<b style="color: #28a745;">CONFIRMADA</b>',
+    "NAO_LOCALIZADA": '<b style="color: #dc3545;">NÃO ENCONTRADA (VERIFICAR)</b>',
+    "NAO_EXECUTADO": '<b style="color: #6c757d;">PENDENTE</b>',
+}
 
 ESTILO_TABELA = """
 <style>
     table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 13px; }
-    th { background-color: #4CAF50; color: white; padding: 8px; text-align: left; }
+    th { background-color: #343a40; color: white; padding: 10px; text-align: left; }
     td { border: 1px solid #ddd; padding: 8px; vertical-align: top; max-width: 300px; word-wrap: break-word; }
-    tr:nth-child(even) { background-color: #f2f2f2; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
 </style>
 """
 
 
+# ---------------------------------------------------------------- dados
+
 def buscar_agendamentos(usuario: str, senha: str, dsn: str, caminho_sql: Path) -> pd.DataFrame:
-    """Executa a consulta SQL e devolve as colunas PLACA e DOCUMENTO."""
+    """Executa a consulta SQL. Colunas esperadas: PLACA, DOCUMENTO, JANELA_AGENDADA,
+    DATA_PRE_GATE e DATA_GATE_IN."""
     query = caminho_sql.read_text(encoding="utf-8")
     with oracledb.connect(user=usuario, password=senha, dsn=dsn) as conexao:
         with conexao.cursor() as cursor:
@@ -55,134 +53,167 @@ def buscar_agendamentos(usuario: str, senha: str, dsn: str, caminho_sql: Path) -
     return df.drop_duplicates()
 
 
-def filtrar_ja_enviados(df: pd.DataFrame, historico: Path) -> pd.DataFrame:
-    if not historico.exists():
-        return df.copy()
-    enviados = set(pd.read_csv(historico, dtype=str)["DTA"])
-    return df[~df["DOCUMENTO"].astype(str).isin(enviados)].copy()
+def documentos_no_historico(caminho: Path, coluna: str) -> set[str]:
+    if not caminho.exists():
+        return set()
+    return set(pd.read_csv(caminho, dtype=str)[coluna])
 
 
-def iniciar_navegador() -> webdriver.Chrome:
-    options = webdriver.ChromeOptions()
-    options.add_argument("--start-maximized")
-    options.add_argument("--disable-popup-blocking")
-    options.add_argument("--disable-notifications")
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+def adicionar_ao_historico(df: pd.DataFrame, caminho: Path, coluna: str) -> None:
+    if caminho.exists():
+        df = pd.concat([pd.read_csv(caminho, dtype=str), df.astype(str)], ignore_index=True)
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    df.drop_duplicates(subset=[coluna]).to_csv(caminho, index=False)
 
 
-def _texto(navegador, xpath: str) -> str:
-    return navegador.find_element(By.XPATH, xpath).text.strip()
+# ---------------------------------------------------------------- e-mail
 
-
-def consultar_dta(navegador, dta: str) -> dict | None:
-    """Consulta uma DTA. Retorna os dados se houver registro de integridade."""
-    navegador.get(URL_CONSULTA_DTA)
-    WebDriverWait(navegador, 10).until(
-        EC.presence_of_element_located((By.XPATH, XPATH_CAMPO_DTA))
-    ).send_keys(dta)
-    navegador.find_element(By.XPATH, XPATH_BOTAO_CONSULTAR).click()
-
-    # O site abre um alert quando a DTA não existe ou não pode ser consultada.
-    try:
-        navegador.switch_to.alert.accept()
-        return None
-    except NoAlertPresentException:
-        pass
-
-    resultado = WebDriverWait(navegador, 5).until(
-        EC.presence_of_element_located((By.XPATH, XPATH_RESULTADO))
-    ).text.strip()
-    if "INTEGRIDADE" not in resultado.upper():
-        return None
-
-    return {
-        "RESULTADO": resultado,
-        "DATA": _texto(navegador, XPATH_DATA),
-        "NOME": _texto(navegador, XPATH_RESPONSAVEL),
-        "RECINTO ORIGEM": _texto(navegador, XPATH_RECINTO_ORIGEM),
-    }
-
-
-def verificar_dtas(df: pd.DataFrame) -> pd.DataFrame:
-    navegador = iniciar_navegador()
-    encontrados = []
-    try:
-        for _, linha in df.iterrows():
-            dta = str(linha["DOCUMENTO"]).strip()
-            placa = str(linha["PLACA"]).strip()
-            if not dta:
-                continue
-            try:
-                dados = consultar_dta(navegador, dta)
-            except Exception as e:
-                print(f"Não foi possível consultar a DTA {dta}: {e}")
-                continue
-            if dados:
-                encontrados.append({"DTA": dta, "PLACA": placa, **dados})
-            time.sleep(1)
-    finally:
-        navegador.quit()
-    return pd.DataFrame(encontrados, columns=COLUNAS_RESULTADO)
-
-
-def enviar_email(df: pd.DataFrame, destinatarios: str, assinatura: str) -> None:
+def enviar_email(destinatarios: str, assunto: str, corpo_html: str) -> None:
     import win32com.client as win32
 
-    tabela = df.to_html(index=False, border=0, justify="center")
+    email = win32.Dispatch("Outlook.Application").CreateItem(0)
+    email.To = destinatarios
+    email.Subject = assunto
+    email.HTMLBody = corpo_html
+    email.Send()
+    print(f"E-mail enviado: {assunto}")
+
+
+def montar_email_gate_in(df: pd.DataFrame, status_por_placa: dict, assinatura: str) -> tuple[str, str]:
+    tabela = df[["PLACA", "DOCUMENTO", "JANELA_AGENDADA", "DATA_PRE_GATE", "DATA_GATE_IN"]].copy()
+    tabela.columns = ["PLACA", "DOCUMENTO", "JANELA AGENDADA", "DATA PRÉ-GATE", "DATA GATE IN"]
+    codigos = df["PLACA"].map(status_por_placa).fillna("NAO_EXECUTADO")
+    tabela["STATUS CHEGADA"] = codigos.map(STATUS_CHEGADA)
+
+    falhou = (codigos != "OK").any()
+    if falhou:
+        assunto = "ATENÇÃO: Falha na chegada automática (DTA-E) - ação manual necessária"
+        aviso = ('<p style="color: #dc3545; font-weight: bold;">Um ou mais veículos não tiveram a chegada '
+                 "confirmada automaticamente. Verifique o Siscomex manualmente.</p>")
+    else:
+        assunto = "Sucesso: chegada de veículos DTA-E registrada e validada"
+        aviso = ""
+
     corpo = f"""
+    <html><body style="font-family: Arial, sans-serif;">
+        <p>Prezados,</p>
+        <p>Segue o status do processamento automático de chegada dos veículos DTA-E:</p>
+        {aviso}
+        {ESTILO_TABELA}
+        {tabela.to_html(index=False, border=0, escape=False, justify="center")}
+        <p style="font-size: 11px; color: #666;">* E-mail gerado automaticamente pelo robô de monitoramento de trânsito.</p>
+        <p>Atenciosamente,<br><b>{assinatura}</b></p>
+    </body></html>
+    """
+    return assunto, corpo
+
+
+def montar_email_integridade(df: pd.DataFrame, assinatura: str) -> str:
+    return f"""
     <p>Prezados,</p>
     <p>Segue abaixo a atualização de integridade extraída automaticamente:</p>
     {ESTILO_TABELA}
-    {tabela}
+    {df.to_html(index=False, border=0, justify="center")}
     <p>Atenciosamente,<br><b>{assinatura}</b></p>
     """
-    email = win32.Dispatch("Outlook.Application").CreateItem(0)
-    email.To = destinatarios
-    email.Subject = "Atualização de Integridade - DTA"
-    email.HTMLBody = corpo
-    email.Send()
-    print("E-mail enviado.")
 
 
-def atualizar_historico(df: pd.DataFrame, historico: Path) -> None:
-    if historico.exists():
-        df = pd.concat([pd.read_csv(historico, dtype=str), df], ignore_index=True)
-    historico.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(historico, index=False)
-    print(f"Histórico atualizado em {historico}")
+# ---------------------------------------------------------------- etapas
+
+def processar_gate_in(robo: RoboTransito, df: pd.DataFrame) -> dict:
+    """Registra e valida a chegada de cada veículo. Retorna {placa: status}."""
+    status = {}
+    for _, linha in df.drop_duplicates(subset=["PLACA"]).iterrows():
+        documento, placa = str(linha["DOCUMENTO"]).strip(), str(linha["PLACA"]).strip()
+        print(f"Registrando chegada: placa {placa} / documento {documento}")
+        if robo.registrar_chegada(documento, placa) or robo.chegada_consta_no_fluxo(documento):
+            status[placa] = "OK"
+        else:
+            status[placa] = "NAO_LOCALIZADA"
+    return status
 
 
-def main() -> None:
-    load_dotenv()
-    historico = Path(os.getenv("HISTORICO_CSV", "saida/emails_enviados.csv"))
+def processar_integridade(robo: RoboTransito, df: pd.DataFrame) -> pd.DataFrame:
+    encontrados = []
+    for _, linha in df.iterrows():
+        dta = str(linha["DOCUMENTO"]).strip()
+        if not dta:
+            continue
+        dados = robo.consultar_integridade(dta)
+        if dados:
+            encontrados.append({"DTA": dta, "PLACA": str(linha["PLACA"]).strip(), **dados})
+    return pd.DataFrame(encontrados, columns=COLUNAS_INTEGRIDADE)
 
-    df_agendamentos = buscar_agendamentos(
+
+def executar() -> str:
+    destinatarios = os.environ["EMAIL_DESTINATARIOS"]
+    assinatura = os.getenv("EMAIL_ASSINATURA", NOME_ROTINA)
+    historico_gate_in = Path(os.getenv("HISTORICO_GATE_IN", "saida/gate_in_enviados.csv"))
+    historico_integridade = Path(os.getenv("HISTORICO_INTEGRIDADE", "saida/emails_enviados.csv"))
+
+    agendamentos = buscar_agendamentos(
         usuario=os.environ["ORACLE_USUARIO"],
         senha=os.environ["ORACLE_SENHA"],
         dsn=os.environ["ORACLE_DSN"],
         caminho_sql=Path(os.getenv("ARQUIVO_SQL", "consulta_agendamentos.sql")),
     )
-    if df_agendamentos.empty:
-        print("Nenhum agendamento com DTA encontrado.")
-        return
+    if agendamentos.empty:
+        return "Nenhum agendamento de DTA encontrado."
 
-    pendentes = filtrar_ja_enviados(df_agendamentos, historico)
-    if pendentes.empty:
-        print("Nenhuma DTA nova para processar.")
-        return
-    print(f"{len(pendentes)} DTAs novas para consultar.")
+    agendamentos["DOCUMENTO"] = agendamentos["DOCUMENTO"].astype(str)
+    resumo = []
+    robo = RoboTransito()
+    try:
+        robo.logar_com_certificado()
 
-    resultado = verificar_dtas(pendentes)
-    if resultado.empty:
-        print("Nenhum registro de integridade encontrado.")
-        return
+        ja_avisados = documentos_no_historico(historico_gate_in, "DOCUMENTO")
+        gate_in = agendamentos[
+            agendamentos["DATA_GATE_IN"].notna() & ~agendamentos["DOCUMENTO"].isin(ja_avisados)
+        ]
+        if not gate_in.empty:
+            print(f"Gate-in: {len(gate_in)} documentos para registrar.")
+            status = processar_gate_in(robo, gate_in)
+            assunto, corpo = montar_email_gate_in(gate_in, status, assinatura)
+            enviar_email(destinatarios, assunto, corpo)
+            adicionar_ao_historico(gate_in[["DOCUMENTO"]], historico_gate_in, "DOCUMENTO")
+            resumo.append(f"Gate-in: {len(gate_in)} documentos")
 
-    enviar_email(
-        resultado,
-        destinatarios=os.environ["EMAIL_DESTINATARIOS"],
-        assinatura=os.getenv("EMAIL_ASSINATURA", "Automação de Integridade"),
-    )
-    atualizar_historico(resultado, historico)
+        ja_comunicados = documentos_no_historico(historico_integridade, "DTA")
+        pendentes = agendamentos[~agendamentos["DOCUMENTO"].isin(ja_comunicados)]
+        if not pendentes.empty:
+            print(f"Integridade: {len(pendentes)} DTAs para consultar.")
+            ocorrencias = processar_integridade(robo, pendentes)
+            if not ocorrencias.empty:
+                enviar_email(destinatarios, "Atualização de Integridade - DTA",
+                             montar_email_integridade(ocorrencias, assinatura))
+                adicionar_ao_historico(ocorrencias, historico_integridade, "DTA")
+                resumo.append(f"Integridade: {len(ocorrencias)} ocorrências")
+    finally:
+        robo.fechar()
+
+    return "Processamento concluído. " + " | ".join(resumo) if resumo else "Finalizado sem envio de e-mail."
+
+
+def main() -> None:
+    load_dotenv()
+    try:
+        detalhe, status = executar(), "Sucesso"
+    except Exception as e:
+        detalhe, status = str(e), "Falha"
+    print(f"{status}: {detalhe}")
+
+    # O robô roda a cada poucos minutos; o log por e-mail sai só no início de
+    # cada hora, quando algo foi processado ou quando houve falha.
+    destinatarios_log = os.getenv("EMAIL_DESTINATARIOS_LOG")
+    if destinatarios_log and (datetime.now().minute <= 5 or "concluído" in detalhe or status == "Falha"):
+        tabela = pd.DataFrame({
+            "Rotina": [NOME_ROTINA],
+            "Hora da Execução": [datetime.now().strftime("%d-%m-%Y %H:%M:%S")],
+            "Status": [status],
+            "Execução/Erro": [detalhe],
+        })
+        enviar_email(destinatarios_log, f"Log de automação - {NOME_ROTINA} - {status}",
+                     f"<p>Relatório de execução do robô:</p>{tabela.to_html(index=False, border=1)}")
 
 
 if __name__ == "__main__":

@@ -1,18 +1,34 @@
-# Verificador de Integridade de DTA
+# Monitor de DTA – Gate-in e Integridade
 
-Automação que cruza os agendamentos de caminhões do armazém com a consulta pública da Receita Federal e avisa a equipe, por e-mail, quando uma carga em trânsito aduaneiro (DTA) tem registro de **integridade** (ocorrência de violação de lacre ou de volumes).
+Robô que acompanha as cargas em **trânsito aduaneiro (DTA)** que chegam ao armazém. Ele faz duas coisas que antes eram manuais:
+
+1. **Registro de chegada:** quando o caminhão passa pelo gate-in, o robô registra a chegada do veículo no Siscomex Trânsito, confere se o registro aparece no fluxo da declaração e avisa a equipe sobre o status de cada veículo.
+2. **Integridade:** consulta cada DTA no site da Receita e alerta a equipe quando há ocorrência de integridade (violação de lacre ou de volumes) registrada no trânsito.
 
 ## Problema
 
-Cargas que chegam por DTA podem ter ocorrências registradas no trânsito. A equipe só descobria isso ao consultar cada DTA manualmente no site da Receita, normalmente depois de o caminhão já estar no pátio.
+Os registros de chegada eram feitos à mão, veículo a veículo, e atrasos geravam pendências no despacho. As ocorrências de integridade só eram descobertas quando alguém consultava a DTA, muitas vezes com o caminhão já no pátio.
 
 ## Solução
 
-1. **Banco Oracle** – busca os agendamentos do dia com DTA (placa + número) usando o SQL do arquivo [`consulta_agendamentos.sql`](consulta_agendamentos.sql).
-2. **Deduplicação** – ignora as DTAs já comunicadas, guardadas num histórico CSV.
-3. **Selenium** – consulta cada DTA no site da Receita e trata alerts de DTA inexistente.
-4. **Filtro** – mantém só as consultas com registro de integridade e extrai data, responsável e recinto de origem.
-5. **Outlook** – envia uma tabela HTML formatada para a equipe e atualiza o histórico.
+```
+Oracle (agendamentos DTA)
+   ├─ veículos com gate-in ─► registra chegada no Siscomex ─► confere no fluxo ─► e-mail com status
+   └─ DTAs ainda não verificadas ─► consulta integridade ─► e-mail se houver ocorrência
+Históricos em CSV evitam reprocessar o mesmo documento.
+```
+
+- **Validação em duas etapas:** se a tela de registro não confirma na hora, o robô verifica no fluxo da declaração se a chegada consta antes de marcá-la como falha.
+- **E-mail de alerta:** o assunto muda conforme o resultado, e a tabela destaca em cores cada status (confirmada, não encontrada, pendente).
+- **Log controlado:** o robô roda a cada poucos minutos, mas só manda o e-mail de log no início de cada hora, quando processa algo ou quando há falha.
+
+## Estrutura
+
+| Arquivo | Responsabilidade |
+|---|---|
+| `verificar_integridade.py` | Orquestração, banco, históricos e e-mails |
+| `robo_transito.py` | Robô Selenium para o Siscomex Trânsito |
+| `consulta_agendamentos.sql` | Consulta de exemplo (contrato de colunas) |
 
 ## Stack
 
@@ -22,13 +38,13 @@ Python · oracledb · Selenium · pandas · pywin32 (Outlook) · python-dotenv
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env   # credenciais do banco e destinatários
+cp .env.example .env
 python verificar_integridade.py
 ```
 
-Requer Windows com o Outlook configurado (envio via COM) e Google Chrome.
+Requer Windows com Outlook, Google Chrome e um **certificado digital** com acesso ao Siscomex Trânsito instalado no navegador.
 
 ## Observações
 
-- O SQL deste repositório é um **exemplo**: a consulta original usava o modelo de dados interno do terminal. O script só exige que a consulta retorne as colunas `PLACA` e `DOCUMENTO`.
-- Credenciais, endereço do banco e destinatários ficam no `.env`, fora do código.
+- O SQL deste repositório é um **exemplo**: a consulta original usava o modelo de dados interno do terminal.
+- A versão original tinha dois bugs: vírgulas no fim da linha transformavam usuário e senha em tuplas, e um `replace("OK", ...)` no HTML inteiro podia alterar placas que contêm "OK". Os dois foram corrigidos.
