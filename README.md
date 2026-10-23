@@ -9,13 +9,14 @@ Projetos de automação de processos (RPA e integrações) que desenvolvi para a
 | Projeto | O que faz | Stack |
 |---|---|---|
 | [Monitor de Programação de Navios](monitor-programacao-navios/) | Coleta a programação de navios de um terminal e publica em CSV ou SharePoint | Selenium, pandas, SharePoint |
-| [Verificador de Integridade de DTA](verificador-integridade-dta/) | Cruza agendamentos do banco Oracle com a consulta da Receita e alerta a equipe sobre ocorrências de integridade | Oracle, Selenium, Outlook |
+| [Monitor de DTA – Gate-in e Integridade](verificador-integridade-dta/) | Registra e valida no Siscomex a chegada dos veículos em trânsito aduaneiro e alerta a equipe sobre ocorrências de integridade | Oracle, Selenium, Outlook |
+| [Pipeline de Vistorias Aduaneiras](pipeline-vistorias-aduaneiras/) | Sincroniza solicitações de vistoria por API, calcula o SLA em dias úteis, enriquece com Siscomex e banco e sinaliza itens de risco | REST/OAuth2, Selenium, Oracle, SharePoint |
 | [Consulta de Perdimento – Siscarga/Siscomex](consulta-perdimento-siscomex/) | Atualiza os indicadores de cargas em risco de perdimento consultando CE Mercante e DI | Selenium, SharePoint, Outlook |
 | [Consulta de DUIMP – Portal Único](consulta-duimp-portal-unico/) | Confere DUIMPs na API oficial do Portal Único Siscomex com certificado digital | API REST, mTLS, pandas |
 
 ## Tecnologias
 
-Python 3.10+ · Selenium · pandas · REST APIs · Oracle (oracledb) · SharePoint Online (Office365-REST-Python-Client) · Outlook via COM (pywin32)
+Python 3.10+ · Selenium · pandas · REST APIs / OAuth2 · Oracle (oracledb) · SharePoint Online (Office365-REST-Python-Client) · Outlook via COM (pywin32) · workalendar
 
 ## Como rodar um projeto
 
