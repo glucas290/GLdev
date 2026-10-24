@@ -4,6 +4,29 @@ Painel usado pela equipe operacional do armazém alfandegado de um terminal port
 
 > Esta versão foi **reconstruída para o portfólio** com bases fictícias: não contém dados de clientes, endereços internos, nomes da empresa ou de colegas. A lógica de negócio (etapas, metas em dias úteis, tratamentos no Power Query) segue a do painel original.
 
+### ▶ [Abrir o painel interativo](https://app.powerbi.com/view?r=eyJrIjoiN2M0MDBjMjEtNjU4NS00NTZhLThkM2YtYjMyM2UzMmQ2ZjljIiwidCI6ImU2OWJmYmEwLTQwZjQtNDMwMi1hZjc4LTJjNTkxYTU3ZmFmYiJ9)
+
+Publicado no Power BI Service: abre no navegador, sem login, com filtros e navegação entre as páginas.
+
+![Visão geral](docs/img/01-visao-geral.png)
+
+<details>
+<summary>Ver as outras páginas</summary>
+
+**Conferência Aduaneira**
+
+![Conferência Aduaneira](docs/img/02-conferencia-aduaneira.png)
+
+**Entrega de Carga Solta**
+
+![Entrega de Carga Solta](docs/img/03-entrega-carga-solta.png)
+
+**Recebimento e Desunitização**
+
+![Recebimento e Desunitização](docs/img/04-recebimento-desunitizacao.png)
+
+</details>
+
 ## Indicadores
 
 | KPI | O que mede | Início → Fim | Meta |
@@ -53,6 +76,12 @@ Destaques:
 - **Justificativas.** São mescladas pela chave usada pela equipe (janela agendada + placa). Os horários vindos do Excel são arredondados ao minuto para a mesclagem não falhar.
 
 Modelo estrela: as quatro fatos se ligam a `dCalendario` (pela data de referência) e a `dCliente`; a entrega também se liga a `dTransportadora`.
+
+## Layout
+
+- Tema próprio (`TemaArmazem.json`) com as cores de um terminal à noite: azul-marinho e as cores dos contêineres. Cada processo tem uma cor: turquesa para conferência, laranja para entrega e amarelo para recebimento.
+- Banner e ícones em SVG feitos para o painel, com animações leves: portêineres movimentando contêineres, caminhão rodando, lupa de conferência.
+- Velocímetros com a marca da meta e indicador "Meta x% ▲/▼ y p.p.", que fica verde ou vermelho por formatação condicional baseada em medidas DAX.
 
 ## Como abrir
 
