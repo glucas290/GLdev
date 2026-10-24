@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "KPI Armazem Portuario"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4bf16296-c40b-4077-8af4-f2b15305f808"
+  }
+}

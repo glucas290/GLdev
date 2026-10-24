@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="29" fill="#F28C28" fill-opacity="0.16" stroke="#F28C28" stroke-width="2"/>
+  <g fill="none" stroke="#F28C28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1.5;0 0" dur="0.6s" repeatCount="indefinite"/>
+      <rect x="10" y="22" width="26" height="17" rx="1.5"/><path d="M36 27 h8 l7 7 v5 h-15 z"/></g>
+    <circle cx="19" cy="44" r="4"/><circle cx="44" cy="44" r="4"/>
+    <line x1="4" y1="50" x2="60" y2="50" stroke-dasharray="4 5"><animate attributeName="stroke-dashoffset" values="0;18" dur="0.8s" repeatCount="indefinite"/></line></g>
+</svg>

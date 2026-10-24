@@ -1,0 +1,246 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "cf_detalhe",
+  "position": {
+    "x": 444,
+    "y": 496,
+    "z": 40000,
+    "height": 216,
+    "width": 820,
+    "tabOrder": 40000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "CONTAINER"
+                }
+              },
+              "queryRef": "fConferencia.CONTAINER",
+              "nativeQueryRef": "CONTAINER"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "SERVICO_KPI"
+                }
+              },
+              "queryRef": "fConferencia.SERVICO_KPI",
+              "nativeQueryRef": "SERVICO_KPI"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "DATA_PEDIDO"
+                }
+              },
+              "queryRef": "fConferencia.DATA_PEDIDO",
+              "nativeQueryRef": "DATA_PEDIDO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "DATA_FECHAMENTO"
+                }
+              },
+              "queryRef": "fConferencia.DATA_FECHAMENTO",
+              "nativeQueryRef": "DATA_FECHAMENTO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "META_ENVIO_RELATORIO"
+                }
+              },
+              "queryRef": "fConferencia.META_ENVIO_RELATORIO",
+              "nativeQueryRef": "META_ENVIO_RELATORIO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "HORAS_CICLO_TOTAL"
+                }
+              },
+              "queryRef": "fConferencia.HORAS_CICLO_TOTAL",
+              "nativeQueryRef": "HORAS_CICLO_TOTAL"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fConferencia"
+                    }
+                  },
+                  "Property": "STATUS_ENVIO_RELATORIO"
+                }
+              },
+              "queryRef": "fConferencia.STATUS_ENVIO_RELATORIO",
+              "nativeQueryRef": "STATUS_ENVIO_RELATORIO"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Detalhamento por contêiner'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9ad5b7e9b6d38305ecd1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "CONTAINER"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d242f76b36d11362bf93",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "SERVICO_KPI"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cab1a0f280e788539c80",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "DATA_PEDIDO"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e274417b1bb84dc16ae1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "DATA_FECHAMENTO"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a22c550f85462a74d159",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "META_ENVIO_RELATORIO"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9df6140c9ae613c71b2c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "HORAS_CICLO_TOTAL"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "37653f2db02ce7b8b5f4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fConferencia"
+              }
+            },
+            "Property": "STATUS_ENVIO_RELATORIO"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

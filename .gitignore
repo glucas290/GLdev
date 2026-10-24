@@ -17,3 +17,10 @@ venv/
 # Saídas geradas pelas automações
 saida/
 *.log
+
+# Node (gerador de dados do painel Power BI)
+node_modules/
+
+# Power BI Project: cache local e configurações da máquina
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

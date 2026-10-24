@@ -1,0 +1,39 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Caminho das bases e ajustes de ambiente
+queryGroup '0 Parâmetros'
+
+/// Funções M reutilizáveis (prazos em dias úteis, metas, origem SharePoint)
+queryGroup '1 Funções'
+
+/// Extrações do sistema operacional do terminal. Não carregadas no modelo.
+queryGroup '2 Origem Oracle (TOS)'
+
+/// Planilhas de controle das equipes. Não carregadas no modelo.
+queryGroup '3 Origem SharePoint'
+
+/// Tabelas de apoio carregadas no modelo
+queryGroup '4 Dimensões'
+
+/// Tabelas de fato dos três KPIs
+queryGroup '5 Fatos'
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table dCalendario
+ref table dCliente
+ref table dTransportadora
+ref table dMeta
+ref table fConferencia
+ref table fEntregaCargaSolta
+ref table fRecebimento
+ref table fSolicitacaoPosicionamento
+ref table Medidas
+ref table dEtapaRecebimento
+

@@ -1,0 +1,245 @@
+/// KPI de Conferência Aduaneira: do pedido de posicionamento do contêiner até o envio do relatório ao fiscal (RFB/MAPA/ANVISA).
+table fConferencia
+	lineageTag: 71cab6e1-33cb-4d0a-9571-c6de0ccddf48
+
+	column ID_POSIC_MERC
+		dataType: int64
+		formatString: 0
+		lineageTag: fe0a0731-91ea-408c-892c-9558390ee347
+		summarizeBy: none
+		sourceColumn: ID_POSIC_MERC
+
+	column CONTAINER
+		dataType: string
+		lineageTag: 5ef89c5b-593f-4712-8bf5-ed1fbdfe141e
+		summarizeBy: none
+		sourceColumn: CONTAINER
+
+	column ISO
+		dataType: string
+		lineageTag: 36d7e96f-4a29-447c-a316-db77042ce4cb
+		summarizeBy: none
+		sourceColumn: ISO
+
+	column ID_CLIENTE
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 480da8b7-8c49-48ad-9344-5ae12d3302f1
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+	column SERVICO
+		dataType: string
+		lineageTag: a23eb067-9478-454f-867f-75a1369d10b0
+		summarizeBy: none
+		sourceColumn: SERVICO
+
+	column SERVICO_KPI
+		dataType: string
+		lineageTag: c94db881-9608-4a87-b92c-8838b3a245f2
+		summarizeBy: none
+		sourceColumn: SERVICO_KPI
+
+	column GRUPO_FISCAL
+		dataType: string
+		lineageTag: 367ea23c-c220-4459-b98f-3e5e13256efb
+		summarizeBy: none
+		sourceColumn: GRUPO_FISCAL
+
+	column SETOR
+		dataType: string
+		lineageTag: 18ed396b-82cc-483d-9913-715748ae73fb
+		summarizeBy: none
+		sourceColumn: SETOR
+
+	column CANAL_PARAMETRIZACAO
+		dataType: string
+		lineageTag: 51fa8cff-dbf0-47fd-8d9f-275fbf7e9ed0
+		summarizeBy: none
+		sourceColumn: CANAL_PARAMETRIZACAO
+
+	column STATUS
+		dataType: string
+		lineageTag: c729143f-efef-4f85-90d1-b8d581924244
+		summarizeBy: none
+		sourceColumn: STATUS
+
+	column DATA_REFERENCIA
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 8f22cfa0-a86b-4650-acb3-66efa99b56a6
+		summarizeBy: none
+		sourceColumn: DATA_REFERENCIA
+
+	column ENTRADA_CTNR
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 2a3148f6-3cbf-4cfb-b184-1b331a8bdab8
+		summarizeBy: none
+		sourceColumn: ENTRADA_CTNR
+
+	column DATA_PEDIDO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 22bd515e-52e7-46e5-b9b4-66d3d60918d4
+		summarizeBy: none
+		sourceColumn: DATA_PEDIDO
+
+	column DATA_PROGRAMADO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 78755165-785e-40d5-8297-0b70dce7ee6b
+		summarizeBy: none
+		sourceColumn: DATA_PROGRAMADO
+
+	column INICIO_POSICIONAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 56614a4a-1886-4a78-9180-1257d98984e3
+		summarizeBy: none
+		sourceColumn: INICIO_POSICIONAMENTO
+
+	column DATA_POSICIONADO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: e8a0dd3c-e4d1-4066-94da-c5c525f3deab
+		summarizeBy: none
+		sourceColumn: DATA_POSICIONADO
+
+	column META_POSICIONAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 65d3dc63-6396-4c17-a226-872b44e63741
+		summarizeBy: none
+		sourceColumn: META_POSICIONAMENTO
+
+	column DATA_PEDIDO_ICONFERE
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 1d73fa24-a422-44ee-9134-ef4b9cae33b1
+		summarizeBy: none
+		sourceColumn: DATA_PEDIDO_ICONFERE
+
+	column INICIO_SERVICO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 9d8bbf3d-cca1-4a3e-884e-c939fa6a3400
+		summarizeBy: none
+		sourceColumn: INICIO_SERVICO
+
+	column DATA_LIBERACAO_FISCAL
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 189dbe7d-f545-4b58-91c2-aa7b1f1591b8
+		summarizeBy: none
+		sourceColumn: DATA_LIBERACAO_FISCAL
+
+	column DATA_FECHAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: db0b3c9f-2f28-4704-8bc0-1a413f0ab79a
+		summarizeBy: none
+		sourceColumn: DATA_FECHAMENTO
+
+	column META_ENVIO_RELATORIO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 8a22b04f-61db-4bad-a99f-43655e7fcf53
+		summarizeBy: none
+		sourceColumn: META_ENVIO_RELATORIO
+
+	column HORAS_POSICIONAMENTO
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 8c281148-796a-404a-b794-4075d5b655d6
+		summarizeBy: none
+		sourceColumn: HORAS_POSICIONAMENTO
+
+	column HORAS_ATENDIMENTO_FISCAL
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 3be238d5-9881-4daa-8652-38b4c3d70c50
+		summarizeBy: none
+		sourceColumn: HORAS_ATENDIMENTO_FISCAL
+
+	column HORAS_CICLO_TOTAL
+		dataType: double
+		formatString: #,0.0
+		lineageTag: f599727f-3f71-4c00-8380-3f209b2e67b8
+		summarizeBy: none
+		sourceColumn: HORAS_CICLO_TOTAL
+
+	column STATUS_POSICIONAMENTO
+		dataType: string
+		lineageTag: 1d97c76d-7209-4971-a521-64ef31bf140f
+		summarizeBy: none
+		sourceColumn: STATUS_POSICIONAMENTO
+
+	column STATUS_ENVIO_RELATORIO
+		dataType: string
+		lineageTag: bc9ada00-40b7-4224-a2eb-58903a822a7f
+		summarizeBy: none
+		sourceColumn: STATUS_ENVIO_RELATORIO
+
+	column PEDIDO_ANTES_DESCARGA
+		dataType: boolean
+		lineageTag: 00e701be-2ac4-4687-a1da-129a43d11bbf
+		summarizeBy: none
+		sourceColumn: PEDIDO_ANTES_DESCARGA
+
+	column JUSTIFICATIVA
+		dataType: string
+		lineageTag: ab0814b1-ebdb-4706-b519-2e7f5f55b8ef
+		summarizeBy: none
+		sourceColumn: JUSTIFICATIVA
+
+	column AREA_RESPONSAVEL
+		dataType: string
+		lineageTag: 49ba8de5-a169-4602-bc65-e92669d7aee2
+		summarizeBy: none
+		sourceColumn: AREA_RESPONSAVEL
+
+	partition fConferencia = m
+		mode: import
+		queryGroup: '5 Fatos'
+		source =
+				let
+				    Origem = stg_TOS_Conferencia,
+				    // cancelados e fotografia de contêiner não entram no indicador (mesma regra do painel original)
+				    SoKPI = Table.SelectRows(Origem, each [STATUS] <> "CANCELADO" and [SERVICO] <> "POS. FOTOGRAFIA CONTÊINER"),
+				    ContainerPadronizado = Table.TransformColumns(SoKPI, {{"CONTAINER", fnLimparContainer, type text}}),
+				    ServicoKPI = Table.AddColumn(ContainerPadronizado, "SERVICO_KPI", each
+				        if Text.StartsWith([SERVICO], "DESUNITIZAÇÃO") then [SERVICO]
+				        else if [GRUPO_FISCAL] = "MAPA/ANVISA" then "MAPA/ANVISA - SERVIÇOS SEM DESOVA"
+				        else "RFB - SERVIÇOS SEM DESOVA", type text),
+				    MesclaControle = Table.NestedJoin(ServicoKPI, {"ID_POSIC_MERC"}, stg_SP_Conferencia, {"ID_POSIC_MERC"}, "Controle", JoinKind.LeftOuter),
+				    ExpandeControle = Table.ExpandTableColumn(MesclaControle, "Controle", {"DATA_PEDIDO_ICONFERE", "DATA_LIBERACAO_FISCAL", "SETOR", "CANAL_PARAMETRIZACAO"}),
+				    MesclaJustificativa = Table.NestedJoin(ExpandeControle, {"ID_POSIC_MERC"}, stg_SP_JustConferencia, {"ID_POSIC_MERC"}, "Just", JoinKind.LeftOuter),
+				    ExpandeJustificativa = Table.ExpandTableColumn(MesclaJustificativa, "Just", {"JUSTIFICATIVA", "AREA_RESPONSAVEL"}),
+				    // o relógio do posicionamento só corre com o contêiner já no terminal
+				    InicioPosicionamento = Table.AddColumn(ExpandeJustificativa, "INICIO_POSICIONAMENTO", each List.Max({[DATA_PEDIDO], [ENTRADA_CTNR]}), type datetime),
+				    // RFB: conta a partir do pedido do fiscal no iConfere; MAPA/ANVISA: a partir do pedido no TOS
+				    InicioServico = Table.AddColumn(InicioPosicionamento, "INICIO_SERVICO", each if [GRUPO_FISCAL] = "RFB" then [DATA_PEDIDO_ICONFERE] else [INICIO_POSICIONAMENTO], type datetime),
+				    MetaPosicionamento = Table.AddColumn(InicioServico, "META_POSICIONAMENTO", each fnAplicarMeta([INICIO_POSICIONAMENTO], "CONFERÊNCIA", "POSICIONAMENTO", "TODOS"), type datetime),
+				    MetaRelatorio = Table.AddColumn(MetaPosicionamento, "META_ENVIO_RELATORIO", each fnAplicarMeta([INICIO_SERVICO], "CONFERÊNCIA", "ENVIO DO RELATÓRIO", [SERVICO_KPI]), type datetime),
+				    HorasPosicionamento = Table.AddColumn(MetaRelatorio, "HORAS_POSICIONAMENTO", each fnHoras([INICIO_POSICIONAMENTO], [DATA_POSICIONADO]), type number),
+				    HorasAtendimento = Table.AddColumn(HorasPosicionamento, "HORAS_ATENDIMENTO_FISCAL", each fnHoras([INICIO_SERVICO], [DATA_FECHAMENTO]), type number),
+				    HorasCiclo = Table.AddColumn(HorasAtendimento, "HORAS_CICLO_TOTAL", each fnHoras([DATA_PEDIDO], [DATA_FECHAMENTO]), type number),
+				    StatusPosicionamento = Table.AddColumn(HorasCiclo, "STATUS_POSICIONAMENTO", each fnStatusPrazo([DATA_POSICIONADO], [META_POSICIONAMENTO]), type text),
+				    StatusRelatorio = Table.AddColumn(StatusPosicionamento, "STATUS_ENVIO_RELATORIO", each fnStatusPrazo([DATA_FECHAMENTO], [META_ENVIO_RELATORIO]), type text),
+				    PedidoAntesDescarga = Table.AddColumn(StatusRelatorio, "PEDIDO_ANTES_DESCARGA", each [DATA_PEDIDO] < [ENTRADA_CTNR], type logical),
+				    DataReferencia = Table.AddColumn(PedidoAntesDescarga, "DATA_REFERENCIA", each DateTime.Date([DATA_PEDIDO]), type date),
+				    // atraso sem justificativa fica explícito no gráfico de motivos
+				    SemJustificativa = Table.ReplaceValue(DataReferencia, each [JUSTIFICATIVA], each if [JUSTIFICATIVA] = null and [STATUS_ENVIO_RELATORIO] = "FORA DO PRAZO" then "SEM JUSTIFICATIVA" else [JUSTIFICATIVA], Replacer.ReplaceValue, {"JUSTIFICATIVA"}),
+				    Colunas = Table.SelectColumns(SemJustificativa, {
+				        "ID_POSIC_MERC", "CONTAINER", "ISO", "ID_CLIENTE", "SERVICO", "SERVICO_KPI", "GRUPO_FISCAL", "SETOR", "CANAL_PARAMETRIZACAO", "STATUS",
+				        "DATA_REFERENCIA", "ENTRADA_CTNR", "DATA_PEDIDO", "DATA_PROGRAMADO", "INICIO_POSICIONAMENTO", "DATA_POSICIONADO", "META_POSICIONAMENTO",
+				        "DATA_PEDIDO_ICONFERE", "INICIO_SERVICO", "DATA_LIBERACAO_FISCAL", "DATA_FECHAMENTO", "META_ENVIO_RELATORIO",
+				        "HORAS_POSICIONAMENTO", "HORAS_ATENDIMENTO_FISCAL", "HORAS_CICLO_TOTAL", "STATUS_POSICIONAMENTO", "STATUS_ENVIO_RELATORIO",
+				        "PEDIDO_ANTES_DESCARGA", "JUSTIFICATIVA", "AREA_RESPONSAVEL"
+				    })
+				in
+				    Colunas
+

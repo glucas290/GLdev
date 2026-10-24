@@ -1,0 +1,71 @@
+/// Metas vigentes por processo e etapa (planilha de parâmetros).
+table dMeta
+	lineageTag: 9c21433f-9849-4447-a956-1a96b7584c1c
+
+	column PROCESSO
+		dataType: string
+		lineageTag: dbbe7409-493d-4ad1-90da-dfbe249b66f3
+		summarizeBy: none
+		sourceColumn: PROCESSO
+
+	column ETAPA
+		dataType: string
+		lineageTag: aba2f0f7-45e2-45b2-b364-7244f552c1c2
+		summarizeBy: none
+		sourceColumn: ETAPA
+
+	column SERVICO_KPI
+		dataType: string
+		lineageTag: b52a3e56-2a2b-4875-8296-85e56f28eca7
+		summarizeBy: none
+		sourceColumn: SERVICO_KPI
+
+	column TIPO_META
+		dataType: string
+		lineageTag: 73d0540e-081b-4edf-995c-242eeddd808b
+		summarizeBy: none
+		sourceColumn: TIPO_META
+
+	column DIAS_UTEIS
+		dataType: int64
+		formatString: 0
+		lineageTag: 6be6384c-29cf-46fd-a9f0-6b0897eb7c4f
+		summarizeBy: none
+		sourceColumn: DIAS_UTEIS
+
+	column HORA_LIMITE
+		dataType: int64
+		formatString: 0
+		lineageTag: f9330efd-ee07-4203-b43f-da4744556a41
+		summarizeBy: none
+		sourceColumn: HORA_LIMITE
+
+	column HORA_CORTE
+		dataType: int64
+		formatString: 0
+		lineageTag: 592f96a4-d29a-4c7d-b70a-f8242016d83a
+		summarizeBy: none
+		sourceColumn: HORA_CORTE
+
+	column MINUTOS
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a6f48c3-fb87-47ae-95f0-7f45479e4279
+		summarizeBy: none
+		sourceColumn: MINUTOS
+
+	column DESCRICAO
+		dataType: string
+		lineageTag: 432083e6-8782-49e7-941c-a06959ef58c1
+		summarizeBy: none
+		sourceColumn: DESCRICAO
+
+	partition dMeta = m
+		mode: import
+		queryGroup: '4 Dimensões'
+		source =
+				let
+				    Origem = stg_SP_Metas
+				in
+				    Origem
+

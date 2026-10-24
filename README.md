@@ -13,6 +13,7 @@ Projetos de automação de processos (RPA e integrações) que desenvolvi para a
 | [Pipeline de Vistorias Aduaneiras](pipeline-vistorias-aduaneiras/) | Sincroniza solicitações de vistoria por API, calcula o SLA em dias úteis, enriquece com Siscomex e banco e sinaliza itens de risco | REST/OAuth2, Selenium, Oracle, SharePoint |
 | [Consulta de Perdimento – Siscarga/Siscomex](consulta-perdimento-siscomex/) | Atualiza os indicadores de cargas em risco de perdimento consultando CE Mercante e DI | Selenium, SharePoint, Outlook |
 | [Consulta de DUIMP – Portal Único](consulta-duimp-portal-unico/) | Confere DUIMPs na API oficial do Portal Único Siscomex com certificado digital | API REST, mTLS, pandas |
+| [KPI Diário – Armazém](kpi-armazem-portuario/) | Painel Power BI com os KPIs de conferência aduaneira, entrega de carga solta e recebimento/desunitização, consolidando TOS (Oracle) e planilhas SharePoint | Power BI, Power Query (M), DAX, PBIP |
 
 ## Tecnologias
 

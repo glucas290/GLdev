@@ -1,0 +1,152 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1144.8693069480719,
+            "y": 434.5949832570368
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "669e986a-980a-4c17-826c-1b24d8ee0c22",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 624.097000194832,
+            "y": 525.81177571349417
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "affb82a8-6e40-4a2a-b162-b52248d72e84",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 211.501095891389,
+            "y": 303.00589218345488
+          },
+          "nodeIndex": "dCliente",
+          "nodeLineageTag": "885cc375-72cd-4be3-a9e3-3295e529255c",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1428.8693069480719,
+            "y": 436.5949832570368
+          },
+          "nodeIndex": "dMeta",
+          "nodeLineageTag": "9c21433f-9849-4447-a956-1a96b7584c1c",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 967.1899665140736
+          },
+          "nodeIndex": "dTransportadora",
+          "nodeLineageTag": "9eee07e3-5546-4082-b4a1-c77b029d9d5a",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 405.6415366372529,
+            "y": -50
+          },
+          "nodeIndex": "fConferencia",
+          "nodeLineageTag": "71cab6e1-33cb-4d0a-9571-c6de0ccddf48",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 337.02137594762837,
+            "y": 634.48715396083753
+          },
+          "nodeIndex": "fEntregaCargaSolta",
+          "nodeLineageTag": "edbaabc2-a3cf-4eb5-9bf0-2e67fa496328",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 691.225803065076,
+            "y": 172.1296623647587
+          },
+          "nodeIndex": "fRecebimento",
+          "nodeLineageTag": "e0877c20-fb78-446f-aa10-11ea5a25ff85",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 910.86930694807211,
+            "y": 525.9424501961671
+          },
+          "nodeIndex": "fSolicitacaoPosicionamento",
+          "nodeLineageTag": "49f506f2-1991-4a78-9ab8-3989cebe0ce2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1662.8693069480719,
+            "y": 520.5949832570368
+          },
+          "nodeIndex": "dEtapaRecebimento",
+          "nodeLineageTag": "dbb629dd-907c-4ebb-8597-63762ea537c4",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

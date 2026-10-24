@@ -1,0 +1,36 @@
+/// Transportadoras - cadastro do TOS.
+table dTransportadora
+	lineageTag: 9eee07e3-5546-4082-b4a1-c77b029d9d5a
+
+	column ID_TRANSPORTADORA
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: b36b74ec-c52e-4741-b870-08ee9e1f8bf7
+		summarizeBy: none
+		sourceColumn: ID_TRANSPORTADORA
+
+	column TRANSPORTADORA
+		dataType: string
+		lineageTag: 119a9062-2d8c-432b-b2a8-f6571adc03e5
+		summarizeBy: none
+		sourceColumn: TRANSPORTADORA
+
+	column UF
+		dataType: string
+		lineageTag: 45813c91-96cd-4ba5-803b-99be25020c9b
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF
+
+	partition dTransportadora = m
+		mode: import
+		queryGroup: '4 Dimensões'
+		source =
+				let
+				    Origem = stg_TOS_Transportadoras,
+				    Renomeadas = Table.RenameColumns(Origem, {{"NOME_TRANSPORTADORA", "TRANSPORTADORA"}})
+				in
+				    Renomeadas
+

@@ -1,0 +1,92 @@
+/// Solicitações de posicionamento pátio x armazém por tipo de serviço e setor.
+table fSolicitacaoPosicionamento
+	lineageTag: 49f506f2-1991-4a78-9ab8-3989cebe0ce2
+
+	column NUM_SOLICITACAO
+		dataType: int64
+		formatString: 0
+		lineageTag: 597a298e-3da9-488b-a265-5cacec001f07
+		summarizeBy: none
+		sourceColumn: NUM_SOLICITACAO
+
+	column DATA_REFERENCIA
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 65cde503-270b-4749-b828-aa86ac47bad5
+		summarizeBy: none
+		sourceColumn: DATA_REFERENCIA
+
+	column DATA_SOLICITACAO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 439ecf45-2c94-42f8-bbc1-1d30aad042bd
+		summarizeBy: none
+		sourceColumn: DATA_SOLICITACAO
+
+	column CONTAINER
+		dataType: string
+		lineageTag: 3fe500b4-bc12-45ac-81f7-7af2cec6b550
+		summarizeBy: none
+		sourceColumn: CONTAINER
+
+	column TAM
+		dataType: int64
+		formatString: 0
+		lineageTag: e7fa5509-ecdc-4334-b4dc-f98e61db91eb
+		summarizeBy: none
+		sourceColumn: TAM
+
+	column TIPO_SERVICO
+		dataType: string
+		lineageTag: eb735f31-3032-4134-8825-8290e0f7f299
+		summarizeBy: none
+		sourceColumn: TIPO_SERVICO
+
+	column LOCAL_ATUAL
+		dataType: string
+		lineageTag: fbc479c2-3b5e-4f7e-b8c4-cf4d582864b1
+		summarizeBy: none
+		sourceColumn: LOCAL_ATUAL
+
+	column LOCAL_PLANEJADO
+		dataType: string
+		lineageTag: 12406919-a99f-41c6-ab98-2a50c849713b
+		summarizeBy: none
+		sourceColumn: LOCAL_PLANEJADO
+
+	column SETOR
+		dataType: string
+		lineageTag: d49036d3-2398-472f-88a1-51bfb573ea50
+		summarizeBy: none
+		sourceColumn: SETOR
+
+	column SOLICITANTE
+		dataType: string
+		lineageTag: c141aff7-da82-4307-81eb-374d92971fdb
+		summarizeBy: none
+		sourceColumn: SOLICITANTE
+
+	column POSICIONADO
+		dataType: string
+		lineageTag: 76852153-0713-4a79-b934-60e35a61ac18
+		summarizeBy: none
+		sourceColumn: POSICIONADO
+
+	column STATUS
+		dataType: string
+		lineageTag: e1953f81-db21-470c-8026-933377fb1cd0
+		summarizeBy: none
+		sourceColumn: STATUS
+
+	partition fSolicitacaoPosicionamento = m
+		mode: import
+		queryGroup: '5 Fatos'
+		source =
+				let
+				    Origem = stg_SP_Solicitacoes,
+				    DataReferencia = Table.AddColumn(Origem, "DATA_REFERENCIA", each DateTime.Date([DATA_SOLICITACAO]), type date),
+				    Colunas = Table.SelectColumns(DataReferencia, {"NUM_SOLICITACAO", "DATA_REFERENCIA", "DATA_SOLICITACAO", "CONTAINER", "TAM", "TIPO_SERVICO", "LOCAL_ATUAL", "LOCAL_PLANEJADO", "SETOR", "SOLICITANTE", "POSICIONADO", "STATUS"})
+				in
+				    Colunas
+

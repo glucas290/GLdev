@@ -1,0 +1,317 @@
+/// Recebimento e desunitização: da solicitação de posicionamento do cliente até a armazenagem da carga e o envio do relatório.
+table fRecebimento
+	lineageTag: e0877c20-fb78-446f-aa10-11ea5a25ff85
+
+	column CONTAINER
+		dataType: string
+		lineageTag: 5b8ec007-b357-46c8-bd22-54ff551a5307
+		summarizeBy: none
+		sourceColumn: CONTAINER
+
+	column BL
+		dataType: string
+		lineageTag: 9350a8e0-2586-4843-8f48-ce4744bf7d57
+		summarizeBy: none
+		sourceColumn: BL
+
+	column ID_CLIENTE
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: eded252e-62a6-468e-ba78-446953c2d2c0
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+	column TAM
+		dataType: int64
+		formatString: 0
+		lineageTag: 668a9fdb-8f5c-4647-b792-d2163f49a9ad
+		summarizeBy: none
+		sourceColumn: TAM
+
+	column MODAL
+		dataType: string
+		lineageTag: c84fe9d4-e744-4017-ae1d-6bbcececffd0
+		summarizeBy: none
+		sourceColumn: MODAL
+
+	column SERVICO
+		dataType: string
+		lineageTag: b5635ad1-8e9d-4aac-a7d0-3a94598bcc6d
+		summarizeBy: none
+		sourceColumn: SERVICO
+
+	column ARMADOR
+		dataType: string
+		lineageTag: b67b367d-0465-4883-bdba-378fbde2f740
+		summarizeBy: none
+		sourceColumn: ARMADOR
+
+	column NAVIO
+		dataType: string
+		lineageTag: ce27b26a-d5d8-4746-b891-8b75e03fa453
+		summarizeBy: none
+		sourceColumn: NAVIO
+
+	column TERMINAL_DESCARGA
+		dataType: string
+		lineageTag: 4d88a02f-2c22-41ad-9de1-2d11772b74f5
+		summarizeBy: none
+		sourceColumn: TERMINAL_DESCARGA
+
+	column FREE_TIME_DIAS
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a80999f-6ef2-41e1-947e-f12ca5e7c4ab
+		summarizeBy: none
+		sourceColumn: FREE_TIME_DIAS
+
+	column LOCAL_PLANEJADO
+		dataType: string
+		lineageTag: 36de5639-6b40-4294-b85a-b5a68205baef
+		summarizeBy: none
+		sourceColumn: LOCAL_PLANEJADO
+
+	column STATUS_PROCESSO
+		dataType: string
+		lineageTag: d2138521-42ce-436c-b530-3c90a7d55f1e
+		summarizeBy: none
+		sourceColumn: STATUS_PROCESSO
+
+	column CANCELADA
+		dataType: boolean
+		lineageTag: b246784b-e7af-4b1c-b1c5-783d4889b34a
+		summarizeBy: none
+		sourceColumn: CANCELADA
+
+	column DATA_REFERENCIA
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 57b88866-2025-4ed9-9dc8-a195382fea31
+		summarizeBy: none
+		sourceColumn: DATA_REFERENCIA
+
+	column FIM_OPERACAO_NAVIO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: e802a6b9-2b37-415c-886e-b9b3ee324c53
+		summarizeBy: none
+		sourceColumn: FIM_OPERACAO_NAVIO
+
+	column TIME_IN
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 61a83c86-7a94-42d6-979f-5ca85c46b9e1
+		summarizeBy: none
+		sourceColumn: TIME_IN
+
+	column DATA_SOLICITACAO_PROCESSO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 4ff57c52-907f-4ac8-be0c-0762fc6a2632
+		summarizeBy: none
+		sourceColumn: DATA_SOLICITACAO_PROCESSO
+
+	column DATA_SOLICITACAO_POSICIONAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 1ea62c65-9e8d-4109-a487-3eb8e0d9f681
+		summarizeBy: none
+		sourceColumn: DATA_SOLICITACAO_POSICIONAMENTO
+
+	column DATA_POSICIONADO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: f469f807-077b-4ea3-9aea-d417244300ee
+		summarizeBy: none
+		sourceColumn: DATA_POSICIONADO
+
+	column META_POSICIONAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 3e6d9a5c-7a52-48dc-ba28-0e5d5b855c89
+		summarizeBy: none
+		sourceColumn: META_POSICIONAMENTO
+
+	column DATA_PROGRAMADO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: b6ebbdaf-1bb8-458d-a0bd-f90ed5033fc7
+		summarizeBy: none
+		sourceColumn: DATA_PROGRAMADO
+
+	column DATA_FIM_DESUNITIZACAO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 5b6cd245-4e78-4383-8c71-0a0bdb4f5770
+		summarizeBy: none
+		sourceColumn: DATA_FIM_DESUNITIZACAO
+
+	column META_DESUNITIZACAO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 8dd8a272-a53c-40e8-b713-ac0aa11c8a61
+		summarizeBy: none
+		sourceColumn: META_DESUNITIZACAO
+
+	column DATA_ARMAZENAGEM
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 955c984f-ded2-419f-af29-6dc261f087fc
+		summarizeBy: none
+		sourceColumn: DATA_ARMAZENAGEM
+
+	column META_ARMAZENAGEM
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: cc2af369-5f95-4436-9f38-1df63e5f38b8
+		summarizeBy: none
+		sourceColumn: META_ARMAZENAGEM
+
+	column DATA_ENVIO_RELATORIO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 9356d026-61da-4360-95b6-520632282dab
+		summarizeBy: none
+		sourceColumn: DATA_ENVIO_RELATORIO
+
+	column META_ENVIO_RELATORIO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 2f7efed1-bf01-4c47-a095-a2233ba15a16
+		summarizeBy: none
+		sourceColumn: META_ENVIO_RELATORIO
+
+	column HORAS_POSICIONAMENTO
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 55231490-873f-4a16-8d79-82b541a2d03a
+		summarizeBy: none
+		sourceColumn: HORAS_POSICIONAMENTO
+
+	column HORAS_DESUNITIZACAO
+		dataType: double
+		formatString: #,0.0
+		lineageTag: e1261996-a6e8-4bf2-95e7-67c56c9592fd
+		summarizeBy: none
+		sourceColumn: HORAS_DESUNITIZACAO
+
+	column HORAS_ARMAZENAGEM
+		dataType: double
+		formatString: #,0.0
+		lineageTag: e166859e-bf9a-4b0b-95e7-425790949c33
+		summarizeBy: none
+		sourceColumn: HORAS_ARMAZENAGEM
+
+	column HORAS_ENVIO_RELATORIO
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 246c465e-51bc-487a-8eac-3fd01f31ed40
+		summarizeBy: none
+		sourceColumn: HORAS_ENVIO_RELATORIO
+
+	column HORAS_LEAD_TIME
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 1aa6c851-bdeb-4045-b365-1372dda7342f
+		summarizeBy: none
+		sourceColumn: HORAS_LEAD_TIME
+
+	column DIAS_TIME_IN_ATE_SOLICITACAO
+		dataType: double
+		formatString: #,0.0
+		lineageTag: a32b13ed-ca6b-42a5-a8f0-81c9459ceccd
+		summarizeBy: none
+		sourceColumn: DIAS_TIME_IN_ATE_SOLICITACAO
+
+	column STATUS_POSICIONAMENTO
+		dataType: string
+		lineageTag: 3e30f35a-7062-4ec1-bb64-42df9b041a73
+		summarizeBy: none
+		sourceColumn: STATUS_POSICIONAMENTO
+
+	column STATUS_DESUNITIZACAO
+		dataType: string
+		lineageTag: ec16d590-b661-4ee3-b4bf-98207511bcd2
+		summarizeBy: none
+		sourceColumn: STATUS_DESUNITIZACAO
+
+	column STATUS_ARMAZENAGEM
+		dataType: string
+		lineageTag: 219662d7-c467-4d90-866e-600ecfe66847
+		summarizeBy: none
+		sourceColumn: STATUS_ARMAZENAGEM
+
+	column STATUS_ENVIO_RELATORIO
+		dataType: string
+		lineageTag: 164c9f87-e608-49b4-9387-0e0c3c81a95c
+		summarizeBy: none
+		sourceColumn: STATUS_ENVIO_RELATORIO
+
+	column STATUS_GERAL
+		dataType: string
+		lineageTag: c97d72cf-3475-43c1-bff6-7e8710941e94
+		summarizeBy: none
+		sourceColumn: STATUS_GERAL
+
+	column JUSTIFICATIVA
+		dataType: string
+		lineageTag: 2eaf9329-ef0b-470a-af80-d09b950459d9
+		summarizeBy: none
+		sourceColumn: JUSTIFICATIVA
+
+	partition fRecebimento = m
+		mode: import
+		queryGroup: '5 Fatos'
+		source =
+				let
+				    Origem = stg_SP_Recebimento,
+				    // 1ª solicitação de posicionamento para desova (planilha do pátio)
+				    Solicitacoes = Table.Group(
+				        Table.SelectRows(stg_SP_Solicitacoes, each [TIPO_SERVICO] = "DESOVA"), {"CONTAINER"},
+				        {{"DATA_SOLICITACAO_POSICIONAMENTO", each List.Min([DATA_SOLICITACAO]), type datetime}, {"LOCAL_PLANEJADO", each List.First([LOCAL_PLANEJADO]), type text}}),
+				    // posicionamento executado no TOS; se foi refeito, vale o primeiro
+				    Posicionamentos = Table.Group(
+				        Table.SelectRows(stg_TOS_Movimentacao, each [TIPO_MOVIMENTO] = "POSICIONAMENTO ARMAZÉM"), {"CONTAINER"},
+				        {{"DATA_POSICIONADO", each List.Min([EXECUTADO]), type datetime}}),
+				    MesclaSolicitacao = Table.NestedJoin(Origem, {"CONTAINER"}, Solicitacoes, {"CONTAINER"}, "Solic", JoinKind.LeftOuter),
+				    ExpandeSolicitacao = Table.ExpandTableColumn(MesclaSolicitacao, "Solic", {"DATA_SOLICITACAO_POSICIONAMENTO", "LOCAL_PLANEJADO"}),
+				    MesclaPosicionamento = Table.NestedJoin(ExpandeSolicitacao, {"CONTAINER"}, Posicionamentos, {"CONTAINER"}, "Posic", JoinKind.LeftOuter),
+				    ExpandePosicionamento = Table.ExpandTableColumn(MesclaPosicionamento, "Posic", {"DATA_POSICIONADO"}),
+				    // a planilha traz o nome do cliente; o modelo usa o código do cadastro do TOS
+				    MesclaCliente = Table.NestedJoin(ExpandePosicionamento, {"CLIENTE"}, stg_TOS_Clientes, {"RAZAO_SOCIAL"}, "Cli", JoinKind.LeftOuter),
+				    ExpandeCliente = Table.ExpandTableColumn(MesclaCliente, "Cli", {"ID_CLIENTE"}),
+				    Cancelada = Table.AddColumn(ExpandeCliente, "CANCELADA", each [DESOVA_CANCELADA] = "SIM", type logical),
+				    MetaPosicionamento = Table.AddColumn(Cancelada, "META_POSICIONAMENTO", each fnAplicarMeta([DATA_SOLICITACAO_POSICIONAMENTO], "RECEBIMENTO", "POSICIONAMENTO", "TODOS"), type datetime),
+				    MetaDesunitizacao = Table.AddColumn(MetaPosicionamento, "META_DESUNITIZACAO", each fnAplicarMeta([DATA_POSICIONADO], "RECEBIMENTO", "DESUNITIZAÇÃO", "TODOS"), type datetime),
+				    MetaArmazenagem = Table.AddColumn(MetaDesunitizacao, "META_ARMAZENAGEM", each fnAplicarMeta([DATA_FIM_DESUNITIZACAO], "RECEBIMENTO", "PRESENÇA DE CARGA", "TODOS"), type datetime),
+				    MetaRelatorio = Table.AddColumn(MetaArmazenagem, "META_ENVIO_RELATORIO", each fnAplicarMeta([DATA_FIM_DESUNITIZACAO], "RECEBIMENTO", "ENVIO DO RELATÓRIO", "TODOS"), type datetime),
+				    HorasPosicionamento = Table.AddColumn(MetaRelatorio, "HORAS_POSICIONAMENTO", each fnHoras([DATA_SOLICITACAO_POSICIONAMENTO], [DATA_POSICIONADO]), type number),
+				    HorasDesunitizacao = Table.AddColumn(HorasPosicionamento, "HORAS_DESUNITIZACAO", each fnHoras([DATA_POSICIONADO], [DATA_FIM_DESUNITIZACAO]), type number),
+				    HorasArmazenagem = Table.AddColumn(HorasDesunitizacao, "HORAS_ARMAZENAGEM", each fnHoras([DATA_FIM_DESUNITIZACAO], [DATA_ARMAZENAGEM]), type number),
+				    HorasRelatorio = Table.AddColumn(HorasArmazenagem, "HORAS_ENVIO_RELATORIO", each fnHoras([DATA_FIM_DESUNITIZACAO], [DATA_ENVIO_RELATORIO]), type number),
+				    LeadTime = Table.AddColumn(HorasRelatorio, "HORAS_LEAD_TIME", each fnHoras([DATA_SOLICITACAO_POSICIONAMENTO], [DATA_ARMAZENAGEM]), type number),
+				    DiasPatio = Table.AddColumn(LeadTime, "DIAS_TIME_IN_ATE_SOLICITACAO", each if [TIME_IN] = null or [DATA_SOLICITACAO_POSICIONAMENTO] = null then null else Number.Round(Duration.TotalDays([DATA_SOLICITACAO_POSICIONAMENTO] - [TIME_IN]), 1), type number),
+				    StatusPosicionamento = Table.AddColumn(DiasPatio, "STATUS_POSICIONAMENTO", each if [CANCELADA] then null else fnStatusPrazo([DATA_POSICIONADO], [META_POSICIONAMENTO]), type text),
+				    StatusDesunitizacao = Table.AddColumn(StatusPosicionamento, "STATUS_DESUNITIZACAO", each if [CANCELADA] then null else fnStatusPrazo([DATA_FIM_DESUNITIZACAO], [META_DESUNITIZACAO]), type text),
+				    StatusArmazenagem = Table.AddColumn(StatusDesunitizacao, "STATUS_ARMAZENAGEM", each if [CANCELADA] then null else fnStatusPrazo([DATA_ARMAZENAGEM], [META_ARMAZENAGEM]), type text),
+				    StatusRelatorio = Table.AddColumn(StatusArmazenagem, "STATUS_ENVIO_RELATORIO", each if [CANCELADA] then null else fnStatusPrazo([DATA_ENVIO_RELATORIO], [META_ENVIO_RELATORIO]), type text),
+				    StatusGeral = Table.AddColumn(StatusRelatorio, "STATUS_GERAL", each
+				        let etapas = {[STATUS_POSICIONAMENTO], [STATUS_DESUNITIZACAO], [STATUS_ARMAZENAGEM], [STATUS_ENVIO_RELATORIO]}
+				        in if [CANCELADA] then "CANCELADO"
+				           else if List.Contains(etapas, "FORA DO PRAZO") then "FORA DO PRAZO"
+				           else if List.Contains(etapas, "EM ANDAMENTO") or List.Contains(etapas, null) then "EM ANDAMENTO"
+				           else "NO PRAZO", type text),
+				    DataReferencia = Table.AddColumn(StatusGeral, "DATA_REFERENCIA", each DateTime.Date(if [DATA_SOLICITACAO_POSICIONAMENTO] <> null then [DATA_SOLICITACAO_POSICIONAMENTO] else [DATA_SOLICITACAO_PROCESSO]), type date),
+				    Colunas = Table.SelectColumns(DataReferencia, {
+				        "CONTAINER", "BL", "ID_CLIENTE", "TAM", "MODAL", "SERVICO", "ARMADOR", "NAVIO", "TERMINAL_DESCARGA", "FREE_TIME_DIAS", "LOCAL_PLANEJADO",
+				        "STATUS_PROCESSO", "CANCELADA", "DATA_REFERENCIA", "FIM_OPERACAO_NAVIO", "TIME_IN", "DATA_SOLICITACAO_PROCESSO", "DATA_SOLICITACAO_POSICIONAMENTO",
+				        "DATA_POSICIONADO", "META_POSICIONAMENTO", "DATA_PROGRAMADO", "DATA_FIM_DESUNITIZACAO", "META_DESUNITIZACAO", "DATA_ARMAZENAGEM", "META_ARMAZENAGEM",
+				        "DATA_ENVIO_RELATORIO", "META_ENVIO_RELATORIO", "HORAS_POSICIONAMENTO", "HORAS_DESUNITIZACAO", "HORAS_ARMAZENAGEM", "HORAS_ENVIO_RELATORIO",
+				        "HORAS_LEAD_TIME", "DIAS_TIME_IN_ATE_SOLICITACAO", "STATUS_POSICIONAMENTO", "STATUS_DESUNITIZACAO", "STATUS_ARMAZENAGEM", "STATUS_ENVIO_RELATORIO",
+				        "STATUS_GERAL", "JUSTIFICATIVA"
+				    })
+				in
+				    Colunas
+

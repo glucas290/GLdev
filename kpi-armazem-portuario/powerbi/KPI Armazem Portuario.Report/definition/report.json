@@ -1,0 +1,135 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY22SU11",
+      "reportVersionAtImport": {
+        "visual": "1.8.78",
+        "report": "2.0.78",
+        "page": "1.3.78"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "TemaArmazem.json",
+      "reportVersionAtImport": {
+        "visual": "1.8.78",
+        "report": "2.0.78",
+        "page": "1.3.78"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY22SU11",
+          "path": "BaseThemes/CY22SU11.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "banner_conferencia.svg",
+          "path": "banner_conferencia.svg",
+          "type": "Image"
+        },
+        {
+          "name": "banner_entrega.svg",
+          "path": "banner_entrega.svg",
+          "type": "Image"
+        },
+        {
+          "name": "banner_recebimento.svg",
+          "path": "banner_recebimento.svg",
+          "type": "Image"
+        },
+        {
+          "name": "banner_visao_geral.svg",
+          "path": "banner_visao_geral.svg",
+          "type": "Image"
+        },
+        {
+          "name": "fundo_pagina.svg",
+          "path": "fundo_pagina.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_ampulheta.svg",
+          "path": "icone_ampulheta.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_ausente.svg",
+          "path": "icone_ausente.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_caixas.svg",
+          "path": "icone_caixas.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_calendario.svg",
+          "path": "icone_calendario.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_cancelado.svg",
+          "path": "icone_cancelado.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_conferencia.svg",
+          "path": "icone_conferencia.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_entrega.svg",
+          "path": "icone_entrega.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_guindaste.svg",
+          "path": "icone_guindaste.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_portao.svg",
+          "path": "icone_portao.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_recebimento.svg",
+          "path": "icone_recebimento.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_relatorio.svg",
+          "path": "icone_relatorio.svg",
+          "type": "Image"
+        },
+        {
+          "name": "icone_relogio.svg",
+          "path": "icone_relogio.svg",
+          "type": "Image"
+        },
+        {
+          "name": "TemaArmazem.json",
+          "path": "TemaArmazem.json",
+          "type": "CustomTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useEnhancedTooltips": false
+  }
+}

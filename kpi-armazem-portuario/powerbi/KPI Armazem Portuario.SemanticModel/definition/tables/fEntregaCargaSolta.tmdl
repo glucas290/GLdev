@@ -1,0 +1,236 @@
+/// KPI de Entrega de Carga Solta: tempo do caminhão dentro do terminal (gate-in até gate-out) por agendamento.
+table fEntregaCargaSolta
+	lineageTag: edbaabc2-a3cf-4eb5-9bf0-2e67fa496328
+
+	column TICKET
+		dataType: int64
+		formatString: 0
+		lineageTag: dae580b8-9960-4556-b273-d608acdf87bf
+		summarizeBy: none
+		sourceColumn: TICKET
+
+	column STATUS
+		dataType: string
+		lineageTag: 7cbf576e-f4be-4eb7-9fb9-63a056624445
+		summarizeBy: none
+		sourceColumn: STATUS
+
+	column DATA_REFERENCIA
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 9f39cb23-847c-471a-9d3b-4133d8b84415
+		summarizeBy: none
+		sourceColumn: DATA_REFERENCIA
+
+	column DATA_JANELA
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 3f6f22e0-57ce-49d9-9ebe-df23d79b4303
+		summarizeBy: none
+		sourceColumn: DATA_JANELA
+
+	column HORA_JANELA
+		dataType: int64
+		formatString: 0
+		lineageTag: caf22885-5154-4f83-825c-64ef87413e3e
+		summarizeBy: none
+		sourceColumn: HORA_JANELA
+
+	column PLACA
+		dataType: string
+		lineageTag: c2e01c3d-034f-491e-ad0b-f02c4c823e26
+		summarizeBy: none
+		sourceColumn: PLACA
+
+	column ID_TRANSPORTADORA
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8808ee06-5035-440d-acfd-cf4cbd02b78f
+		summarizeBy: none
+		sourceColumn: ID_TRANSPORTADORA
+
+	column LOTE
+		dataType: string
+		lineageTag: 34ea717a-d0fe-46b6-9d66-f19b5d40398a
+		summarizeBy: none
+		sourceColumn: LOTE
+
+	column ID_CLIENTE
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 25a9a7e2-71fa-4fbe-b5ce-b74a497fdfeb
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+	column TIPO_DOCUMENTO
+		dataType: string
+		lineageTag: 85955740-e17c-432b-af66-5ad3037a5642
+		summarizeBy: none
+		sourceColumn: TIPO_DOCUMENTO
+
+	column TIPO_ATENDIMENTO
+		dataType: string
+		lineageTag: 3f8ea548-6c0e-46ed-8157-e417410c7768
+		summarizeBy: none
+		sourceColumn: TIPO_ATENDIMENTO
+
+	column QTD_VOLUMES
+		dataType: int64
+		formatString: #,0
+		lineageTag: 3c810f18-c4ef-440d-ae52-d07320829069
+		summarizeBy: sum
+		sourceColumn: QTD_VOLUMES
+
+	column PESO_KG
+		dataType: double
+		formatString: #,0
+		lineageTag: d5a8f3d3-978a-43a4-9a9c-a3c861877332
+		summarizeBy: sum
+		sourceColumn: PESO_KG
+
+	column DATA_PRE_GATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 9fd2856c-9ef0-4e2e-b9f0-3393412de3cf
+		summarizeBy: none
+		sourceColumn: DATA_PRE_GATE
+
+	column DATA_GATE_IN
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: f6fd9288-a64e-4bc8-a5b0-ddb79713947c
+		summarizeBy: none
+		sourceColumn: DATA_GATE_IN
+
+	column INICIO_CARREGAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 0577d082-eac1-463c-a711-c9e6534162c5
+		summarizeBy: none
+		sourceColumn: INICIO_CARREGAMENTO
+
+	column FIM_CARREGAMENTO
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: b1899cb6-9068-47a4-a04b-58d633eb0251
+		summarizeBy: none
+		sourceColumn: FIM_CARREGAMENTO
+
+	column DATA_GATE_OUT
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 115de4d8-1859-451c-8166-83961e9fe850
+		summarizeBy: none
+		sourceColumn: DATA_GATE_OUT
+
+	column MIN_ATRASO_CHEGADA
+		dataType: double
+		formatString: #,0
+		lineageTag: eaa3bd28-0fa7-454b-ac4f-d8f2881139b4
+		summarizeBy: none
+		sourceColumn: MIN_ATRASO_CHEGADA
+
+	column MIN_ESPERA_CARREGAMENTO
+		dataType: double
+		formatString: #,0
+		lineageTag: a3695304-7296-4255-8658-52519a515587
+		summarizeBy: none
+		sourceColumn: MIN_ESPERA_CARREGAMENTO
+
+	column MIN_CARREGAMENTO
+		dataType: double
+		formatString: #,0
+		lineageTag: 534aff35-ca52-47bd-a93a-98561cb45806
+		summarizeBy: none
+		sourceColumn: MIN_CARREGAMENTO
+
+	column MIN_LIBERACAO_SAIDA
+		dataType: double
+		formatString: #,0
+		lineageTag: 79efe7eb-80fa-41b7-beb4-511948a808ff
+		summarizeBy: none
+		sourceColumn: MIN_LIBERACAO_SAIDA
+
+	column MIN_CICLO_TOTAL
+		dataType: double
+		formatString: #,0
+		lineageTag: a6703783-f84c-4e61-8a8f-be67ae2c41ee
+		summarizeBy: none
+		sourceColumn: MIN_CICLO_TOTAL
+
+	column META_MINUTOS
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b913e76-f560-440e-8a48-d2ea1b7c0205
+		summarizeBy: none
+		sourceColumn: META_MINUTOS
+
+	column STATUS_KPI
+		dataType: string
+		lineageTag: 2ca0e246-5c69-4c1d-880d-ed4a92428c1d
+		summarizeBy: none
+		sourceColumn: STATUS_KPI
+
+	column PONTUALIDADE_CHEGADA
+		dataType: string
+		lineageTag: 51e2613f-bd48-44e2-85ef-94369ba2c330
+		summarizeBy: none
+		sourceColumn: PONTUALIDADE_CHEGADA
+
+	column JUSTIFICATIVA
+		dataType: string
+		lineageTag: d5bfaf23-04a4-4023-910d-cddfcfc25c56
+		summarizeBy: none
+		sourceColumn: JUSTIFICATIVA
+
+	column AREA_RESPONSAVEL
+		dataType: string
+		lineageTag: 633f624a-0070-4335-89fa-0722a35399ee
+		summarizeBy: none
+		sourceColumn: AREA_RESPONSAVEL
+
+	partition fEntregaCargaSolta = m
+		mode: import
+		queryGroup: '5 Fatos'
+		source =
+				let
+				    Origem = stg_TOS_Entrega,
+				    TipoAtendimento = Table.AddColumn(Origem, "TIPO_ATENDIMENTO", each
+				        if [TIPO_DOCUMENTO] = "DTA" then "DTA"
+				        else if [ATENDIMENTO_ESPECIAL] = "S" then "ESPECIAL"
+				        else "NORMAL", type text),
+				    // chave da justificativa = janela agendada + placa (como no controle da equipe)
+				    ChaveJanela = Table.TransformColumns(TipoAtendimento, {{"DATA_JANELA", fnArredondarMinuto, type datetime}}),
+				    MesclaJustificativa = Table.NestedJoin(ChaveJanela, {"DATA_JANELA", "PLACA"}, stg_SP_JustEntrega, {"DATA_JANELA", "PLACA"}, "Just", JoinKind.LeftOuter),
+				    ExpandeJustificativa = Table.ExpandTableColumn(MesclaJustificativa, "Just", {"JUSTIFICATIVA", "AREA_RESPONSAVEL"}),
+				    MetasEntrega = Table.SelectRows(stg_SP_Metas, each [PROCESSO] = "ENTREGA"),
+				    MesclaMeta = Table.NestedJoin(ExpandeJustificativa, {"TIPO_ATENDIMENTO"}, MetasEntrega, {"SERVICO_KPI"}, "Meta", JoinKind.LeftOuter),
+				    ExpandeMeta = Table.ExpandTableColumn(MesclaMeta, "Meta", {"MINUTOS"}, {"META_MINUTOS"}),
+				    AtrasoChegada = Table.AddColumn(ExpandeMeta, "MIN_ATRASO_CHEGADA", each fnMinutos([DATA_JANELA], [DATA_GATE_IN]), type number),
+				    EsperaCarregamento = Table.AddColumn(AtrasoChegada, "MIN_ESPERA_CARREGAMENTO", each fnMinutos([DATA_GATE_IN], [INICIO_CARREGAMENTO]), type number),
+				    Carregamento = Table.AddColumn(EsperaCarregamento, "MIN_CARREGAMENTO", each fnMinutos([INICIO_CARREGAMENTO], [FIM_CARREGAMENTO]), type number),
+				    Saida = Table.AddColumn(Carregamento, "MIN_LIBERACAO_SAIDA", each fnMinutos([FIM_CARREGAMENTO], [DATA_GATE_OUT]), type number),
+				    Ciclo = Table.AddColumn(Saida, "MIN_CICLO_TOTAL", each fnMinutos([DATA_GATE_IN], [DATA_GATE_OUT]), type number),
+				    StatusKPI = Table.AddColumn(Ciclo, "STATUS_KPI", each
+				        if [STATUS] <> "FINALIZADO" or [MIN_CICLO_TOTAL] = null then null
+				        else if [MIN_CICLO_TOTAL] <= [META_MINUTOS] then "NO PRAZO"
+				        else "FORA DO PRAZO", type text),
+				    Pontualidade = Table.AddColumn(StatusKPI, "PONTUALIDADE_CHEGADA", each
+				        if [DATA_GATE_IN] = null then null
+				        else if [MIN_ATRASO_CHEGADA] <= 30 then "NO HORÁRIO" else "ATRASADO", type text),
+				    DataReferencia = Table.AddColumn(Pontualidade, "DATA_REFERENCIA", each DateTime.Date([DATA_JANELA]), type date),
+				    HoraJanela = Table.AddColumn(DataReferencia, "HORA_JANELA", each Time.Hour(DateTime.Time([DATA_JANELA])), Int64.Type),
+				    // atraso sem justificativa fica explícito no gráfico de motivos
+				    SemJustificativa = Table.ReplaceValue(HoraJanela, each [JUSTIFICATIVA], each if [JUSTIFICATIVA] = null and [STATUS_KPI] = "FORA DO PRAZO" then "SEM JUSTIFICATIVA" else [JUSTIFICATIVA], Replacer.ReplaceValue, {"JUSTIFICATIVA"}),
+				    Colunas = Table.SelectColumns(SemJustificativa, {
+				        "TICKET", "STATUS", "DATA_REFERENCIA", "DATA_JANELA", "HORA_JANELA", "PLACA", "ID_TRANSPORTADORA", "LOTE", "ID_CLIENTE",
+				        "TIPO_DOCUMENTO", "TIPO_ATENDIMENTO", "QTD_VOLUMES", "PESO_KG", "DATA_PRE_GATE", "DATA_GATE_IN", "INICIO_CARREGAMENTO",
+				        "FIM_CARREGAMENTO", "DATA_GATE_OUT", "MIN_ATRASO_CHEGADA", "MIN_ESPERA_CARREGAMENTO", "MIN_CARREGAMENTO",
+				        "MIN_LIBERACAO_SAIDA", "MIN_CICLO_TOTAL", "META_MINUTOS", "STATUS_KPI", "PONTUALIDADE_CHEGADA", "JUSTIFICATIVA", "AREA_RESPONSAVEL"
+				    })
+				in
+				    Colunas
+

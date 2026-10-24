@@ -1,0 +1,158 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "rc_detalhe",
+  "position": {
+    "x": 444,
+    "y": 496,
+    "z": 79000,
+    "height": 216,
+    "width": 820,
+    "tabOrder": 79000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "CONTAINER"
+                }
+              },
+              "queryRef": "fRecebimento.CONTAINER",
+              "nativeQueryRef": "CONTAINER"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "MODAL"
+                }
+              },
+              "queryRef": "fRecebimento.MODAL",
+              "nativeQueryRef": "MODAL"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "DATA_SOLICITACAO_POSICIONAMENTO"
+                }
+              },
+              "queryRef": "fRecebimento.DATA_SOLICITACAO_POSICIONAMENTO",
+              "nativeQueryRef": "DATA_SOLICITACAO_POSICIONAMENTO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "DATA_POSICIONADO"
+                }
+              },
+              "queryRef": "fRecebimento.DATA_POSICIONADO",
+              "nativeQueryRef": "DATA_POSICIONADO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "DATA_FIM_DESUNITIZACAO"
+                }
+              },
+              "queryRef": "fRecebimento.DATA_FIM_DESUNITIZACAO",
+              "nativeQueryRef": "DATA_FIM_DESUNITIZACAO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "DATA_ARMAZENAGEM"
+                }
+              },
+              "queryRef": "fRecebimento.DATA_ARMAZENAGEM",
+              "nativeQueryRef": "DATA_ARMAZENAGEM"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "HORAS_LEAD_TIME"
+                }
+              },
+              "queryRef": "fRecebimento.HORAS_LEAD_TIME",
+              "nativeQueryRef": "HORAS_LEAD_TIME"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fRecebimento"
+                    }
+                  },
+                  "Property": "STATUS_GERAL"
+                }
+              },
+              "queryRef": "fRecebimento.STATUS_GERAL",
+              "nativeQueryRef": "STATUS_GERAL"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Detalhamento por contêiner'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+relationship fConferencia_DATA_REFERENCIA_dCalendario_Data
+	fromColumn: fConferencia.DATA_REFERENCIA
+	toColumn: dCalendario.Data
+
+relationship fEntregaCargaSolta_DATA_REFERENCIA_dCalendario_Data
+	fromColumn: fEntregaCargaSolta.DATA_REFERENCIA
+	toColumn: dCalendario.Data
+
+relationship fRecebimento_DATA_REFERENCIA_dCalendario_Data
+	fromColumn: fRecebimento.DATA_REFERENCIA
+	toColumn: dCalendario.Data
+
+relationship fSolicitacaoPosicionamento_DATA_REFERENCIA_dCalendario_Data
+	fromColumn: fSolicitacaoPosicionamento.DATA_REFERENCIA
+	toColumn: dCalendario.Data
+
+relationship fConferencia_ID_CLIENTE_dCliente_ID_CLIENTE
+	fromColumn: fConferencia.ID_CLIENTE
+	toColumn: dCliente.ID_CLIENTE
+
+relationship fEntregaCargaSolta_ID_CLIENTE_dCliente_ID_CLIENTE
+	fromColumn: fEntregaCargaSolta.ID_CLIENTE
+	toColumn: dCliente.ID_CLIENTE
+
+relationship fRecebimento_ID_CLIENTE_dCliente_ID_CLIENTE
+	fromColumn: fRecebimento.ID_CLIENTE
+	toColumn: dCliente.ID_CLIENTE
+
+relationship fEntregaCargaSolta_ID_TRANSPORTADORA_dTransportadora_ID_TRANSPORTADORA
+	fromColumn: fEntregaCargaSolta.ID_TRANSPORTADORA
+	toColumn: dTransportadora.ID_TRANSPORTADORA
+

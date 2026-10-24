@@ -1,0 +1,12 @@
+{
+  "name": "kpi-armazem-gerador-dados",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gera as bases fictícias (TOS/Oracle e planilhas SharePoint) do painel KPI Diário - Armazém",
+  "scripts": {
+    "gerar": "node gerar_dados.js"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0"
+  }
+}

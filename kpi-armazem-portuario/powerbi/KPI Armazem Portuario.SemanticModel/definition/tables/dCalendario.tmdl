@@ -1,0 +1,127 @@
+/// Calendário com dias úteis e feriados (gerado no Power Query).
+table dCalendario
+	lineageTag: affb82a8-6e40-4a2a-b162-b52248d72e84
+	dataCategory: Time
+
+	column Data
+		dataType: dateTime
+		isUnique
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: 578c2a63-9787-4629-a598-7fbf1e77fe15
+		summarizeBy: none
+		sourceColumn: Data
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e0bb660-59d9-46ed-bfe3-37a3ce3ed1a5
+		summarizeBy: none
+		sourceColumn: Ano
+
+	column 'Mês Nº'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 910678bf-5a0a-47e5-8e11-eb0c06a6c54b
+		summarizeBy: none
+		sourceColumn: Mês Nº
+
+	column Mês
+		dataType: string
+		lineageTag: 2dbc7271-87f7-4ac3-b38a-9dfc0faed958
+		summarizeBy: none
+		sourceColumn: Mês
+		sortByColumn: 'Mês Nº'
+
+	column Mês/Ano
+		dataType: string
+		lineageTag: e70e7bc0-4654-4faf-aa51-6d6913b95bff
+		summarizeBy: none
+		sourceColumn: Mês/Ano
+		sortByColumn: AnoMês
+
+	column AnoMês
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3fcdcb6b-bcbe-4fdb-93c6-03de77bc6386
+		summarizeBy: none
+		sourceColumn: AnoMês
+
+	column Trimestre
+		dataType: string
+		lineageTag: e1341ca2-c645-437c-96ba-1679992367ab
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+	column Semana
+		dataType: int64
+		formatString: 0
+		lineageTag: 25fb6fde-0311-48e8-9196-a6a4ae96863f
+		summarizeBy: none
+		sourceColumn: Semana
+
+	column 'Dia da Semana Nº'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fcca7fcc-b36d-49fe-b96c-1d2059876663
+		summarizeBy: none
+		sourceColumn: Dia da Semana Nº
+
+	column 'Dia da Semana'
+		dataType: string
+		lineageTag: 03c69660-d733-40b6-b564-ceccf8a17f03
+		summarizeBy: none
+		sourceColumn: Dia da Semana
+		sortByColumn: 'Dia da Semana Nº'
+
+	column Feriado
+		dataType: string
+		lineageTag: 11dc8ced-9efa-4951-bdde-08f1836bca6a
+		summarizeBy: none
+		sourceColumn: Feriado
+
+	column 'Dia Útil'
+		dataType: boolean
+		lineageTag: 473a53b1-b5a3-471f-b10f-46486a8c1f8c
+		summarizeBy: none
+		sourceColumn: Dia Útil
+
+	partition dCalendario = m
+		mode: import
+		queryGroup: '4 Dimensões'
+		source =
+				let
+				    Inicio = #date(2025, 1, 1),
+				    Fim = #date(2026, 12, 31),
+				    Datas = List.Dates(Inicio, Duration.Days(Fim - Inicio) + 1, #duration(1, 0, 0, 0)),
+				    Tabela = Table.FromList(Datas, Splitter.SplitByNothing(), type table [Data = date]),
+				    NomesMes = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"},
+				    NomesDia = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"},
+				    Colunas = Table.AddColumn(Tabela, "Campos", each
+				        let d = [Data], m = Date.Month(d), dsn = Date.DayOfWeek(d, Day.Monday) + 1
+				        in [
+				            Ano = Date.Year(d),
+				            #"Mês Nº" = m,
+				            #"Mês" = NomesMes{m - 1},
+				            #"Mês/Ano" = NomesMes{m - 1} & "/" & Text.End(Text.From(Date.Year(d)), 2),
+				            #"AnoMês" = Date.Year(d) * 100 + m,
+				            Trimestre = "T" & Text.From(Date.QuarterOfYear(d)),
+				            Semana = Date.WeekOfYear(d, Day.Sunday),
+				            #"Dia da Semana Nº" = dsn,
+				            #"Dia da Semana" = NomesDia{dsn - 1}
+				        ]),
+				    Expandida = Table.ExpandRecordColumn(Colunas, "Campos", {"Ano", "Mês Nº", "Mês", "Mês/Ano", "AnoMês", "Trimestre", "Semana", "Dia da Semana Nº", "Dia da Semana"}),
+				    MesclaFeriado = Table.NestedJoin(Expandida, {"Data"}, stg_SP_Feriados, {"DATA"}, "F", JoinKind.LeftOuter),
+				    Feriado = Table.ExpandTableColumn(MesclaFeriado, "F", {"DESCRICAO"}, {"Feriado"}),
+				    DiaUtil = Table.AddColumn(Feriado, "Dia Útil", each [#"Dia da Semana Nº"] <= 5 and [Feriado] = null, type logical),
+				    Tipos = Table.TransformColumnTypes(DiaUtil, {
+				        {"Ano", Int64.Type}, {"Mês Nº", Int64.Type}, {"Mês", type text}, {"Mês/Ano", type text}, {"AnoMês", Int64.Type},
+				        {"Trimestre", type text}, {"Semana", Int64.Type}, {"Dia da Semana Nº", Int64.Type}, {"Dia da Semana", type text}, {"Feriado", type text}
+				    }),
+				    Ordenada = Table.Sort(Tipos, {{"Data", Order.Ascending}})
+				in
+				    Ordenada
+

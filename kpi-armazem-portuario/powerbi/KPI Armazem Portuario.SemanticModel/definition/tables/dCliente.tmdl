@@ -1,0 +1,42 @@
+/// Clientes (importadores) - cadastro do TOS.
+table dCliente
+	lineageTag: 885cc375-72cd-4be3-a9e3-3295e529255c
+
+	column ID_CLIENTE
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 6971d903-5baa-4277-a87d-a6e735650f7e
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+	column CLIENTE
+		dataType: string
+		lineageTag: 627abeb3-e2ef-4f3c-a026-86daa33201f6
+		summarizeBy: none
+		sourceColumn: CLIENTE
+
+	column SEGMENTO
+		dataType: string
+		lineageTag: d4706402-b740-4c48-90ce-82bd72ddf00d
+		summarizeBy: none
+		sourceColumn: SEGMENTO
+
+	column UF
+		dataType: string
+		lineageTag: 8f34d13f-f4aa-40b4-869b-92cdf89c84e6
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF
+
+	partition dCliente = m
+		mode: import
+		queryGroup: '4 Dimensões'
+		source =
+				let
+				    Origem = stg_TOS_Clientes,
+				    Renomeadas = Table.RenameColumns(Origem, {{"RAZAO_SOCIAL", "CLIENTE"}})
+				in
+				    Renomeadas
+

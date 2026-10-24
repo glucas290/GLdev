@@ -1,0 +1,31 @@
+/// Etapas do recebimento, usadas como eixo nos gráficos de % no prazo por etapa (tabela desconectada).
+table dEtapaRecebimento
+	lineageTag: dbb629dd-907c-4ebb-8597-63762ea537c4
+
+	column ETAPA
+		dataType: string
+		lineageTag: 26cc438e-b5ba-430e-a9d5-b2ba033b8393
+		summarizeBy: none
+		sourceColumn: ETAPA
+		sortByColumn: ORDEM
+
+	column ORDEM
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 56ac1131-6d6e-4618-b345-44210d98cffe
+		summarizeBy: none
+		sourceColumn: ORDEM
+
+	partition dEtapaRecebimento = m
+		mode: import
+		queryGroup: '4 Dimensões'
+		source =
+				let
+				    Fonte = #table(
+				        type table [ETAPA = text, ORDEM = Int64.Type],
+				        {{"Posicionamento", 1}, {"Desunitização", 2}, {"Presença de carga", 3}, {"Relatório de desova", 4}}
+				    )
+				in
+				    Fonte
+
